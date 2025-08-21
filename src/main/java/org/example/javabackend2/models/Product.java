@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 public class Product {
     @Id
-    @GeneratedValue
     private Long id;
     private String title;
     private String description;
