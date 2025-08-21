@@ -26,5 +26,5 @@ public class Product {
     private Category category;
     @OneToMany(mappedBy = "product")
     private List<Order> orders;
-    private String imageUrl;
+    private String image;
 }
