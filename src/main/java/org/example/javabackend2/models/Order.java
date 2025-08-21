@@ -1,0 +1,26 @@
+package org.example.javabackend2.models;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Builder
+public class Order {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+}
