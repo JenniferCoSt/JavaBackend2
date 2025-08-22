@@ -14,4 +14,6 @@ public interface UserService {
 
     public User userDtoToUser(UserDto userDto);
 
+    public UserDetailedDto findUserDetailedDtoByEmail(String email);
+
 }
