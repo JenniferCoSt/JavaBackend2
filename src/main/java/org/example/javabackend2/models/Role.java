@@ -21,4 +21,8 @@ public class Role {
     private String type;
     @OneToMany(mappedBy = "role")
     private List<User> users;
+
+    public Role(String type) {
+        this.type = type;
+    }
 }
