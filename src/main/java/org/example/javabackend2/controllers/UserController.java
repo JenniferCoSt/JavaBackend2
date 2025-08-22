@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String showLogin(Model model) {
@@ -23,6 +23,16 @@ public class UserController {
     @PostMapping("/login")
     public String loginUser(Model model, User user) {
 
-        return "products";
+        if(userService.findUserDetailedDtoByEmail(user.getEmail()) != null) {
+            return "redirect:/orders";
+        }
+
+        model.addAttribute("error", "You need to register.");
+        return "/login";
+    }
+
+    @GetMapping("/orders")
+    public String showOrders(Model model) {
+        return "orders";
     }
 }
