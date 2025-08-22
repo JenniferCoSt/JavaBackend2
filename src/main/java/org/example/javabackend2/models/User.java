@@ -1,10 +1,7 @@
 package org.example.javabackend2.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -16,13 +13,25 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
+    @Getter
     private Long id;
+
+    @Getter @Setter
     private String name;
+
+    @Getter @Setter
     private String email;
+
+    @Getter @Setter
     private String password;
+
+    @Getter @Setter
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @Getter @Setter
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+
 }
