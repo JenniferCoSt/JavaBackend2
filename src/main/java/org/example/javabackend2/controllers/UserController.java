@@ -1,6 +1,7 @@
 package org.example.javabackend2.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.javabackend2.dtos.UserDetailedDto;
 import org.example.javabackend2.models.User;
 import org.example.javabackend2.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,17 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginUser(Model model, User user) {
+        UserDetailedDto userLoggingIn = userService.findUserDetailedDtoByEmail(user.getEmail());
 
-        if(userService.findUserDetailedDtoByEmail(user.getEmail()) != null) {
-            return "redirect:/orders";
+        if (userLoggingIn == null) {
+            model.addAttribute("error", "Invalid email or password");
         }
 
-        model.addAttribute("error", "You need to register.");
+        if(userLoggingIn != null && userLoggingIn.getRole().toString().equals("admin")) {
+            return "redirect:/orders";
+        } else if(userLoggingIn != null && userLoggingIn.getRole().toString().equals("user")) {
+            return "redirect:/products";
+        }
         return "/login";
     }
 
