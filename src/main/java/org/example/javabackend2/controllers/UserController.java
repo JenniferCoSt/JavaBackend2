@@ -27,18 +27,28 @@ public class UserController {
 
         if (userLoggingIn == null) {
             model.addAttribute("error", "Invalid email or password");
+            return "login";
         }
 
-        if(userLoggingIn != null && userLoggingIn.getRole().toString().equals("admin")) {
-            return "redirect:/orders";
-        } else if(userLoggingIn != null && userLoggingIn.getRole().toString().equals("user")) {
-            return "redirect:/products";
-        }
-        return "/login";
+        String role = userLoggingIn.getRole().getType().toLowerCase();
+
+        return switch (role) {
+            case "admin" -> "redirect:/orders";
+            case "user" -> "redirect:/products";
+            default -> {
+                model.addAttribute("error", "Invalid role");
+                yield "login";
+            }
+        };
     }
 
     @GetMapping("/orders")
     public String showOrders(Model model) {
         return "orders";
+    }
+
+    @GetMapping("/products")
+    public String showProducts(Model model) {
+        return "products";
     }
 }
