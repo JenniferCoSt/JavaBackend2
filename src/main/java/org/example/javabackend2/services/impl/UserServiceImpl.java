@@ -40,6 +40,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetailedDto findUserDetailedDtoByEmail(String email) {
         User user = userRepository.findByEmail(email);
+        if(user == null) {
+            return null;
+        }
         return userToUserDetailedDto(user);
     }
 }
