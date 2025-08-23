@@ -22,11 +22,17 @@ public class JavaBackend2Application {
     public CommandLineRunner commandLineRunner(UserRepository userRepository, RoleRepository roleRepository) {
         return args -> {
 
-            Role role = new Role();
-            role.setType("admin");
-            role = roleRepository.save(role);
+            Role role1 = new Role();
+            role1.setType("admin");
+            role1 = roleRepository.save(role1);
 
-            userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", "HemligtLösenord", role));
+            userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", "asd", role1));
+
+            Role role2 = new Role();
+            role2.setType("user");
+            role2 = roleRepository.save(role2);
+
+            userRepository.save(new User("Emil", "Lonneberga@4ever.se", "1234", role2));
 
         };
     }
