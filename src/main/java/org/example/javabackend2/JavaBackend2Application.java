@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JavaBackend2Application {
 
     public static void main(String[] args) {
+        System.out.println("hell");
         SpringApplication.run(JavaBackend2Application.class, args);
+        System.out.println("klar");
     }
+
 
 }
