@@ -41,18 +41,4 @@ public class UserController {
             }
         };
     }
-
-    @GetMapping("/orders")
-    public String showOrders(Model model) {
-        return "orders";
-    }
-
-
-    /*
-    @GetMapping("/products")
-    public String showProducts(Model model) {
-        return "products";
-    }
-
-     */
 }
