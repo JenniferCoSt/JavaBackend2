@@ -27,5 +27,6 @@ public class Product {
     //TODO fix
     //@OneToMany(mappedBy = "product")
     //private List<Order> orders;
+
     private String image;
 }
