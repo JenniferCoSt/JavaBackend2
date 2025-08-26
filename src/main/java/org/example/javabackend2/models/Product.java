@@ -24,7 +24,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @OneToMany(mappedBy = "product")
-    private List<Order> orders;
+    //TODO fix
+    //@OneToMany(mappedBy = "product")
+    //private List<Order> orders;
     private String image;
 }

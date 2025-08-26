@@ -47,8 +47,12 @@ public class UserController {
         return "orders";
     }
 
+
+    /*
     @GetMapping("/products")
     public String showProducts(Model model) {
         return "products";
     }
+
+     */
 }
