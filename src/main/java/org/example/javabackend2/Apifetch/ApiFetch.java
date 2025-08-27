@@ -1,15 +1,32 @@
 package org.example.javabackend2.Apifetch;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Arrays;
+import java.util.List;
 
 public class ApiFetch {
 
+
     public static void main(String[] args){
+
+
+
         ApiFetch apiFetch = new ApiFetch();
         apiFetch.fetchApiAsString();
+
+
+
+
     }
 
 
