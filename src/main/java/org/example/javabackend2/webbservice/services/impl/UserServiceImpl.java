@@ -8,6 +8,8 @@ import org.example.javabackend2.webbservice.repos.UserRepository;
 import org.example.javabackend2.webbservice.services.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,10 +19,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailedDto findUserDetailedDtoByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        if(user == null) {
-            return null;
-        }
-        return userMapper.userToUserDetailedDto(user);
+
+        return userRepository.findByEmail(email)
+                .map(userMapper::userToUserDetailedDto)
+                .orElse(null);
+
     }
 }
