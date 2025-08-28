@@ -1,12 +1,10 @@
 package org.example.javabackend2.Apifetch;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Product {
+@Table (name = "Product")
+public class ProductApi {
 
     @Id
     public int id;      //måste använda Long?

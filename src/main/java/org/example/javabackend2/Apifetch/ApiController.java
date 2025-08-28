@@ -1,7 +1,6 @@
 package org.example.javabackend2.Apifetch;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +20,7 @@ public class ApiController {
         this.repo = repo;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(ProductApi product) {
         repo.save(product);
     }
 
@@ -37,8 +36,8 @@ public class ApiController {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         ObjectMapper mapper = new ObjectMapper();
-        List<Product> products = Arrays.asList(
-                mapper.readValue(response.body(), Product[].class)
+        List<ProductApi> products = Arrays.asList(
+                mapper.readValue(response.body(), ProductApi[].class)
         );
 
         repo.saveAll(products);
