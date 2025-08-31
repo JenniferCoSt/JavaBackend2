@@ -2,18 +2,24 @@ package org.example.javabackend2.webbservice.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
+import org.example.javabackend2.webbservice.models.Role;
 import org.example.javabackend2.webbservice.models.User;
+import org.example.javabackend2.webbservice.repos.RoleRepository;
 import org.example.javabackend2.webbservice.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final RoleRepository roleRepository;
 
     @GetMapping("/login")
     public String showLogin(Model model) {
@@ -40,5 +46,34 @@ public class UserController {
                 yield "login";
             }
         };
+    }
+
+    @GetMapping("/register")
+    public String showRegister(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String name,
+                               @RequestParam String email,
+                               @RequestParam String password,
+                               @RequestParam String role,
+                               Model model) {
+        Role selectedRole = roleRepository.findByType(role).orElseThrow(() -> new IllegalArgumentException("Invalid role"));
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setRole(selectedRole);
+
+        boolean registrationSuccessful = userService.saveUser(user);
+        if (!registrationSuccessful) {
+            model.addAttribute("user", user);
+            model.addAttribute("error", "Choose a different email");
+            return "register";
+        }
+        return "redirect:/login";
+
     }
 }

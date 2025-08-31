@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrera</title>
+    <style>
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Registrera</h2>
+
+    <p th:if="${error}" th:text="${error}" style="color: #e74c3c; text-align: center;"></p>
+
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <input type="text" name="name" placeholder="Namn">
+        <input type="text" name="email" placeholder="E-post" required>
+        <input type="password" name="password" placeholder="Lösenord" required>
+        <input type="radio" name="role" value="admin">Admin
+        <input type="radio" name="role" value="user" checked>User
+        <button type="submit">Registrera</button>
+    </form>
+
+    <div class="links">
+        <a href="/login">Tillbaka till inloggning</a>
+    </div>
+</div>
+</body>
+</html>

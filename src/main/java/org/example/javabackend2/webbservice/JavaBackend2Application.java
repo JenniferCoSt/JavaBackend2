@@ -22,17 +22,29 @@ class JavaBackend2Application {
                                                ProductRepository productRepository, CategoryRepository categoryRepository) {
         return args -> {
 
-            Role role1 = new Role();
-            role1.setType("admin");
-            role1 = roleRepository.save(role1);
+            if(roleRepository.findByType("admin").isEmpty()) {
+                Role admin = new Role();
+                admin.setType("admin");
+                roleRepository.save(admin);
+            }
 
-            userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", "asd", role1));
+            if(roleRepository.findByType("user").isEmpty()) {
+                Role user = new Role();
+                user.setType("user");
+                roleRepository.save(user);
+            }
 
-            Role role2 = new Role();
-            role2.setType("user");
-            role2 = roleRepository.save(role2);
-
-            userRepository.save(new User("Emil", "Lonneberga@4ever.se", "1234", role2));
+//            Role role1 = new Role();
+//            role1.setType("admin");
+//            role1 = roleRepository.save(role1);
+//
+//            userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", "asd", role1));
+//
+//            Role role2 = new Role();
+//            role2.setType("user");
+//            role2 = roleRepository.save(role2);
+//
+//            userRepository.save(new User("Emil", "Lonneberga@4ever.se", "1234", role2));
 
 //            Category cat1 = new Category();
 //            cat1.setType("electronics");
