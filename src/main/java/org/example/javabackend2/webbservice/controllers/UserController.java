@@ -16,8 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String showLogin(Model model) {
-        model.addAttribute("user", new User());
+    public String showLogin() {
         return "login";
     }
 
