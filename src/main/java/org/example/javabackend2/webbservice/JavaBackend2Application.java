@@ -29,7 +29,7 @@ class JavaBackend2Application {
             userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", "asd", role1));
 
             Role role2 = new Role();
-            role2.setType("user");
+            role2.setType("customer");
             role2 = roleRepository.save(role2);
 
             userRepository.save(new User("Emil", "Lonneberga@4ever.se", "1234", role2));
