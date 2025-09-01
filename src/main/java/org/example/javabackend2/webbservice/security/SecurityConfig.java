@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .map(user -> User.builder()
                         .username(user.getEmail())
                         .password(user.getPassword())
-                        .roles(user.getRole().getType())
+                        .roles(user.getRole().getType().toUpperCase())
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
@@ -48,11 +48,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login").permitAll()
+                        .requestMatchers("/register", "/login","/products", "/").permitAll()
                         .requestMatchers("/orders").hasRole("ADMIN")
+                        .requestMatchers("/home").authenticated()
                         .anyRequest().authenticated()
                 )
-                .formLogin(login -> login.loginPage("/login").permitAll())
+                .formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/home", false).permitAll())
                 .logout(LogoutConfigurer::permitAll)
                 .csrf(withDefaults());
 
