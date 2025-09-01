@@ -7,9 +7,12 @@
 <body>
 <h1>The Store</h1>
 <h2>You're logged in!</h2>
-<a th:href="@{/index}">Log out</a>
 <a th:href="@{/products}">Products</a>
 <a th:href="@{/orders}">Orders</a>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
+</form>
 <!---<a th:href="@{/register}">Register</a>-->
 </body>
 </html>
