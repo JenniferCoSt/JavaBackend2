@@ -15,6 +15,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/")
+    public String showIndex() {
+        return "index";
+    }
+
     @GetMapping("/login")
     public String showLogin() {
         return "login";
