@@ -21,24 +21,4 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginUser(Model model, User user) {
-        UserDetailedDto userLoggingIn = userService.findUserDetailedDtoByEmail(user.getEmail());
-
-        if (userLoggingIn == null) {
-            model.addAttribute("error", "Invalid email or password");
-            return "login";
-        }
-
-        String role = userLoggingIn.getRole().getType().toLowerCase();
-
-        return switch (role) {
-            case "admin" -> "redirect:/orders";
-            case "user" -> "redirect:/products";
-            default -> {
-                model.addAttribute("error", "Invalid role");
-                yield "login";
-            }
-        };
-    }
 }
