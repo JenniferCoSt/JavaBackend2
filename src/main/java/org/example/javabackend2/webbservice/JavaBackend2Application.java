@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 class JavaBackend2Application {
@@ -19,20 +20,21 @@ class JavaBackend2Application {
 
     @Bean
     public CommandLineRunner commandLineRunner(UserRepository userRepository, RoleRepository roleRepository,
-                                               ProductRepository productRepository, CategoryRepository categoryRepository) {
+                                               ProductRepository productRepository, CategoryRepository categoryRepository,
+                                               PasswordEncoder passwordEncoder) {
         return args -> {
 
             Role role1 = new Role();
             role1.setType("admin");
             role1 = roleRepository.save(role1);
 
-            userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", "asd", role1));
+            userRepository.save(new User("Sigrun", "olafsdottir@4ever.se", passwordEncoder.encode("asd"), role1));
 
             Role role2 = new Role();
             role2.setType("user");
             role2 = roleRepository.save(role2);
 
-            userRepository.save(new User("Emil", "Lonneberga@4ever.se", "1234", role2));
+            userRepository.save(new User("Emil", "Lonneberga@4ever.se", passwordEncoder.encode("1234"), role2));
 
             Category cat1 = new Category();
             cat1.setType("electronics");
