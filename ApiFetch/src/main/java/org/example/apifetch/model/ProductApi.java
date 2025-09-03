@@ -14,23 +14,27 @@ import lombok.NoArgsConstructor;
 @Table (name = "Product")
 public class ProductApi {
 
-    @Id
-    private Long id;
-    private String title;
-    private String description;
-    private double price;
-    @Embedded
-    private RatingApi rating;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private CategoryApi category;
-    //TODO fix
-    //@OneToMany(mappedBy = "product")
-    //private List<Order> orders;
 
-    private String image;
 
-    public CategoryApi getCategory() {
-        return category;
-    }
+
+
+//    @Id
+//    private Long id;
+//    private String title;
+//    private String description;
+//    private double price;
+//    @Embedded
+//    private RatingApi rating;
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
+//    private CategoryApi category;
+//    //TODO fix
+//    //@OneToMany(mappedBy = "product")
+//    //private List<Order> orders;
+//
+//    private String image;
+//
+//    public CategoryApi getCategory() {
+//        return category;
+//    }
 }
