@@ -9,7 +9,7 @@ import org.example.javabackend2.webbservice.models.User;
 import org.example.javabackend2.webbservice.repos.RoleRepository;
 import org.example.javabackend2.webbservice.repos.UserRepository;
 import org.example.javabackend2.webbservice.services.UserService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetailedDto findUserDetailedDtoByEmail(String email) {
@@ -38,7 +39,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         Role role = roleRepository.findByType(userRegisterDto.getRole()).orElse(null);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(userRegisterDto.getPassword());
         userRegisterDto.setPassword(encodedPassword);
 
