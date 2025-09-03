@@ -2,8 +2,11 @@ package org.example.javabackend2.webbservice.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
+import org.example.javabackend2.webbservice.dtos.UserRegisterDto;
 import org.example.javabackend2.webbservice.mappers.UserMapper;
+import org.example.javabackend2.webbservice.models.Role;
 import org.example.javabackend2.webbservice.models.User;
+import org.example.javabackend2.webbservice.repos.RoleRepository;
 import org.example.javabackend2.webbservice.repos.UserRepository;
 import org.example.javabackend2.webbservice.services.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final RoleRepository roleRepository;
 
     @Override
     public UserDetailedDto findUserDetailedDtoByEmail(String email) {
@@ -28,15 +32,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean saveUser(User user) {
-        Optional<User> optionalUser = userRepository.findByEmail(user.getEmail());
+    public boolean saveUser(UserRegisterDto userRegisterDto) {
+        Optional<User> optionalUser = userRepository.findByEmail(userRegisterDto.getEmail());
         if (optionalUser.isPresent()) {
             return false;
         }
+        Role role = roleRepository.findByType(userRegisterDto.getRole()).orElse(null);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(userRegisterDto.getPassword());
+        userRegisterDto.setPassword(encodedPassword);
 
+        User user = userMapper.userRegisterDtoToUser(userRegisterDto, role);
         userRepository.save(user);
         return true;
     }

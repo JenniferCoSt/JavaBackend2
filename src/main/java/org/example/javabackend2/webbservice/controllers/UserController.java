@@ -2,6 +2,7 @@ package org.example.javabackend2.webbservice.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
+import org.example.javabackend2.webbservice.dtos.UserRegisterDto;
 import org.example.javabackend2.webbservice.models.Role;
 import org.example.javabackend2.webbservice.models.User;
 import org.example.javabackend2.webbservice.repos.RoleRepository;
@@ -9,6 +10,7 @@ import org.example.javabackend2.webbservice.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -55,25 +57,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestParam String name,
-                               @RequestParam String email,
-                               @RequestParam String password,
-                               @RequestParam String role,
+    public String registerUser(@ModelAttribute("user") UserRegisterDto userRegisterDto,
                                Model model) {
-        Role selectedRole = roleRepository.findByType(role).orElseThrow(() -> new IllegalArgumentException("Invalid role"));
-        User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setRole(selectedRole);
-
-        boolean registrationSuccessful = userService.saveUser(user);
+        boolean registrationSuccessful = userService.saveUser(userRegisterDto);
         if (!registrationSuccessful) {
-            model.addAttribute("user", user);
+            model.addAttribute("user", userRegisterDto);
             model.addAttribute("error", "Choose a different email");
             return "register";
         }
         return "redirect:/login";
-
     }
 }

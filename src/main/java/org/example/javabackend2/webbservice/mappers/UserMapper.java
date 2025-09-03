@@ -3,6 +3,8 @@ package org.example.javabackend2.webbservice.mappers;
 import org.example.javabackend2.webbservice.dtos.RoleDto;
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
 import org.example.javabackend2.webbservice.dtos.UserDto;
+import org.example.javabackend2.webbservice.dtos.UserRegisterDto;
+import org.example.javabackend2.webbservice.models.Role;
 import org.example.javabackend2.webbservice.models.User;
 import org.springframework.stereotype.Component;
 
@@ -25,5 +27,13 @@ public class UserMapper {
 
     public User userDtoToUser(UserDto userDto) {
         return null;
+    }
+
+    public User userRegisterDtoToUser(UserRegisterDto dto, Role role) {
+        return User.builder()
+                .name(dto.getName())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .role(role).build();
     }
 }
