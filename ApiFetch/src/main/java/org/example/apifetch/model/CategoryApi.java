@@ -19,4 +19,8 @@ public class CategoryApi {
     private String type;
     @OneToMany(mappedBy = "category")
     private List<ProductApi> products;
+
+    public CategoryApi(String type) {
+        this.type = type;
+    }
 }

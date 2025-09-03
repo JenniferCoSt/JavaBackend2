@@ -3,7 +3,8 @@ package org.example.apifetch.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.apifetch.model.CategoryApi;
 import org.example.apifetch.model.ProductApi;
-import org.example.apifetch.repository.ApiRepo;
+import org.example.apifetch.repository.ApiCategoryRepo;
+import org.example.apifetch.repository.ApiProductRepo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,14 +20,17 @@ import java.util.List;
 @RestController
 public class ApiController {
 
-    private final ApiRepo repo;
-    public ApiController(ApiRepo repo) {
-        this.repo = repo;
+    private final ApiProductRepo pruductRepo;
+    private final ApiCategoryRepo catRepo;
+
+    public ApiController(ApiProductRepo pruductRepo, ApiCategoryRepo catRepo) {
+        this.pruductRepo = pruductRepo;
+        this.catRepo = catRepo;
     }
 
-    public void addProduct(ProductApi product) {
-        repo.save(product);
-    }
+//    public void addProduct(ProductApi product) {
+//        pruductRepo.save(product);
+//    }
 
     @RequestMapping("loadapi")
     public void saveProducts() throws IOException, InterruptedException { //kör try with res
@@ -44,18 +48,29 @@ public class ApiController {
                 mapper.readValue(response.body(), ProductApi[].class)
         );
 
+        products.forEach(System.out::println);
+
         System.out.println("Start!");
 
-        List<CategoryApi> categorys = new ArrayList<>();
-        categorys.add((CategoryApi) products.stream().map(ProductApi::getCategory).distinct());
-        categorys.forEach(System.out::println);
+        products.stream().map(ProductApi::getCategory).forEach(System.out::println);
+        System.out.println("\n\n");
+        products.stream().map(ProductApi::getCategory).distinct().forEach(System.out::println);
+
+//        List<CategoryApi> categorys = new ArrayList<>();
+//        System.out.println("1");
+//        categorys.add((CategoryApi) products.stream().map(ProductApi::getCategory).distinct());
+//        System.out.println("2");
+//        categorys.forEach(System.out::println);
+//        System.out.println("3");
 //        repo.saveAll(categorys)
+
+
 
         System.out.println("Stop!");
 
 
 //        repo.saveAll(products.stream().map(ProductApi::getCategoryApi).distinct())
 
-        repo.saveAll(products);
+        pruductRepo.saveAll(products);
     }
 }

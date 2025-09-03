@@ -9,32 +9,57 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Entity
 @Table (name = "Product")
 public class ProductApi {
 
 
-
-
-
 //    @Id
-//    private Long id;
-//    private String title;
-//    private String description;
-//    private double price;
+//    public int id;      //måste använda Long?
+//    public String title;
+//    public double price;
+//    @Column (length = 2000)
+//    public String description;
+//    public String category;
+//    public String image;
 //    @Embedded
-//    private RatingApi rating;
-//    @ManyToOne
-//    @JoinColumn(name = "category_id")
-//    private CategoryApi category;
-//    //TODO fix
-//    //@OneToMany(mappedBy = "product")
-//    //private List<Order> orders;
-//
-//    private String image;
-//
-//    public CategoryApi getCategory() {
-//        return category;
-//    }
+//    public RatingApi rating;
+
+
+
+
+
+    @Id
+    private Long id;
+    private String title;
+    @Column (length = 2000)
+    private String description;
+    private double price;
+
+
+    @Embedded
+    private RatingApi rating;
+
+
+    @Getter
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Category", referencedColumnName = "type")
+    private CategoryApi category;
+
+
+    //TODO fix
+    //@OneToMany(mappedBy = "product")
+    //private List<Order> orders;
+
+    private String image;
+
+
+    public ProductApi(String title, String description, double price, String category, String image) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.category = new CategoryApi(category);
+        this.image = image;
+    }
+
 }
