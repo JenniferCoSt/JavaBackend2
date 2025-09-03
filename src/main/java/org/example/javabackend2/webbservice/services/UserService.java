@@ -1,6 +1,8 @@
 package org.example.javabackend2.webbservice.services;
 
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
+import org.example.javabackend2.webbservice.dtos.UserRegisterDto;
+import org.example.javabackend2.webbservice.models.User;
 
 public interface UserService {
 
@@ -16,4 +18,5 @@ public interface UserService {
     public User userDtoToUser(UserDto userDto);
      */
 
+    boolean saveUser(UserRegisterDto userRegisterDto);
 }
