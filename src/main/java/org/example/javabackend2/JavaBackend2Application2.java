@@ -1,22 +1,22 @@
 package org.example.javabackend2;
 
-import org.example.javabackend2.models.*;
-import org.example.javabackend2.repos.CategoryRepository;
-import org.example.javabackend2.repos.ProductRepository;
-import org.example.javabackend2.repos.RoleRepository;
-import org.example.javabackend2.repos.UserRepository;
+import org.example.javabackend2.webbservice.models.*;
+import org.example.javabackend2.webbservice.repos.CategoryRepository;
+import org.example.javabackend2.webbservice.repos.ProductRepository;
+import org.example.javabackend2.webbservice.repos.RoleRepository;
+import org.example.javabackend2.webbservice.repos.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
+/*
 
-@SpringBootApplication
-public class JavaBackend2Application {
+//@SpringBootApplication
+public class JavaBackend2Application2 {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaBackend2Application.class, args);
+        /*SpringApplication.run(JavaBackend2Application2.class, args );
     }
 
     @Bean
@@ -117,3 +117,5 @@ public class JavaBackend2Application {
         };
     }
 }
+
+*/

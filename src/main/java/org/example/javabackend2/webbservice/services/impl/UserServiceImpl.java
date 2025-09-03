@@ -2,6 +2,7 @@ package org.example.javabackend2.webbservice.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
+import org.example.javabackend2.webbservice.dtos.UserDto;
 import org.example.javabackend2.webbservice.mappers.UserMapper;
 import org.example.javabackend2.webbservice.models.User;
 import org.example.javabackend2.webbservice.repos.UserRepository;
@@ -22,5 +23,14 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         return userMapper.userToUserDetailedDto(user);
+    }
+
+    @Override
+    public UserDto findUserDtoByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null) {
+            return null;
+        }
+        return userMapper.userToUserDto(user);
     }
 }

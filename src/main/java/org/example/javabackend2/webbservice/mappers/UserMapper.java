@@ -20,7 +20,10 @@ public class UserMapper {
     }
 
     public UserDto userToUserDto(User user) {
-        return null;
+        return UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .build();
     }
 
     public User userDtoToUser(UserDto userDto) {

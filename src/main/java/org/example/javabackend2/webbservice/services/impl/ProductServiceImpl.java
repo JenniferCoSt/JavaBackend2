@@ -21,4 +21,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll().stream().map(productMapper::productToProductDto).toList();
     }
 
+    @Override
+    public ProductDto getProductById(long id) {
+        return productRepository.findById(id).map(productMapper::productToProductDto).orElse(null);
+    }
+
 }

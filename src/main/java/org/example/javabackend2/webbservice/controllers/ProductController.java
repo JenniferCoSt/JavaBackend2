@@ -1,11 +1,13 @@
 package org.example.javabackend2.webbservice.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.javabackend2.webbservice.dtos.OrderDto;
 import org.example.javabackend2.webbservice.dtos.ProductDto;
 import org.example.javabackend2.webbservice.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -25,5 +27,13 @@ public class ProductController {
         //}
         model.addAttribute("products", products);
         return "products";
+    }
+
+    @GetMapping("/product/{id}")
+    public String listOneProduct(Model model, @PathVariable long id) {
+        ProductDto product = productService.getProductById(id);
+
+        model.addAttribute("product", product);
+        return "productView";
     }
 }
