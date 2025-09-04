@@ -1,6 +1,8 @@
 package org.example.apifetch.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.apifetch.ApiServices.ApiCategoryServices;
+import org.example.apifetch.ApiServices.ApiProductServices;
 import org.example.apifetch.Dto.ProductDtoApi;
 import org.example.apifetch.model.CategoryApi;
 import org.example.apifetch.model.ProductApi;
@@ -21,6 +23,21 @@ import java.util.List;
 @RestController
 public class ApiController {
 
+    private final ApiCategoryServices apiCategoryServices;
+    private final ApiProductServices apiProductServices;
+
+    public ApiController(ApiCategoryServices apiCategoryServices,ApiProductServices apiProductServices){
+        this.apiCategoryServices = apiCategoryServices;
+        this.apiProductServices = apiProductServices;
+    }
+
+    @RequestMapping("loadapi")
+    public void loadApi() {
+
+        apiProductServices.saveProductsFromApi();
+
+    }
+
 
 
 
@@ -38,10 +55,6 @@ public class ApiController {
 //        pruductRepo.save(product);
 //    }
 
-    @RequestMapping("loadapi")
-    public void loadApi() {
-
-    }
 //    public void saveProducts() throws IOException, InterruptedException { //kör try with res
 //        HttpClient client = HttpClient.newHttpClient();
 //
