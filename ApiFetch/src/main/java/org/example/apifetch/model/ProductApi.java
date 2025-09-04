@@ -1,14 +1,12 @@
 package org.example.apifetch.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table (name = "Product")
 public class ProductApi {
@@ -52,14 +50,5 @@ public class ProductApi {
     //private List<Order> orders;
 
     private String image;
-
-
-    public ProductApi(String title, String description, double price, String category, String image) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.category = new CategoryApi(category);
-        this.image = image;
-    }
 
 }

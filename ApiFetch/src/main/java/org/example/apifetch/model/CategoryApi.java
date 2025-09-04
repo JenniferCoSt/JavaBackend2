@@ -2,6 +2,7 @@ package org.example.apifetch.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 @Entity
 public class CategoryApi {
@@ -19,8 +21,4 @@ public class CategoryApi {
     private String type;
     @OneToMany(mappedBy = "category")
     private List<ProductApi> products;
-
-    public CategoryApi(String type) {
-        this.type = type;
-    }
 }
