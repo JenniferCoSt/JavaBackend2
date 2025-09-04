@@ -25,7 +25,7 @@ public class ProductApi {
 
     @Getter
     @ManyToOne
-    @JoinColumn(name = "Category", referencedColumnName = "type")
+    @JoinColumn(name = "Category_id")
     private CategoryApi category;
 
 
