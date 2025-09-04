@@ -72,6 +72,8 @@ public class ApiProductServicesImpl implements ApiProductServices {
 
             productEntitys.forEach(this::saveProducts);
 
+            System.out.println("\nStop!\n");
+
 
 
 
@@ -92,6 +94,8 @@ public class ApiProductServicesImpl implements ApiProductServices {
 
         CategoryApi category = catServices.getCategoryFromTitel(productDto.getCategory());
 
+        System.out.println("Skapar produkt " + productDto.getTitle());
+
         return ProductApi.builder()
                 .id(productDto.getId())
                 .title(productDto.getTitle())
@@ -105,6 +109,7 @@ public class ApiProductServicesImpl implements ApiProductServices {
 
     public void saveProducts(ProductApi product) {
         prodRepo.save(product);
+        System.out.println("produkt sparad");
     }
 
 
