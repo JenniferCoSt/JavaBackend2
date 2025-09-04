@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ProductDtoApi {
-    private int id;
+    private Long id;
     private String title;
     private String description;
     private double price;

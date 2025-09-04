@@ -11,22 +11,6 @@ import lombok.*;
 @Table (name = "Product")
 public class ProductApi {
 
-
-//    @Id
-//    public int id;      //måste använda Long?
-//    public String title;
-//    public double price;
-//    @Column (length = 2000)
-//    public String description;
-//    public String category;
-//    public String image;
-//    @Embedded
-//    public RatingApi rating;
-
-
-
-
-
     @Id
     private Long id;
     private String title;

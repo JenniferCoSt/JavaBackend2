@@ -1,5 +1,6 @@
 package org.example.apifetch.ApiServices.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.example.apifetch.ApiServices.ApiCategoryServices;
 import org.example.apifetch.Dto.CategoryDtoApi;
 import org.example.apifetch.model.CategoryApi;
