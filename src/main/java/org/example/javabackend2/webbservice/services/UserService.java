@@ -1,12 +1,15 @@
 package org.example.javabackend2.webbservice.services;
 
 import org.example.javabackend2.webbservice.dtos.UserDetailedDto;
+import org.example.javabackend2.webbservice.dtos.UserDto;
 import org.example.javabackend2.webbservice.dtos.UserRegisterDto;
 import org.example.javabackend2.webbservice.models.User;
 
 public interface UserService {
 
     public UserDetailedDto findUserDetailedDtoByEmail(String email);
+
+    UserDto findUserDtoByEmail(String mail);
 
     /*
     public UserDetailedDto userToUserDetailedDto(User user);

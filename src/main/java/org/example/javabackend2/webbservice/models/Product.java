@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,8 +25,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
     //TODO fix
-    //@OneToMany(mappedBy = "product")
-    //private List<Order> orders;
+    @OneToMany(mappedBy = "product")
+    private List<Order> orders;
 
     private String image;
 }
