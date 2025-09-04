@@ -56,6 +56,12 @@ public class ApiController {
         System.out.println("\n\n");
         products.stream().map(ProductApi::getCategory).distinct().forEach(System.out::println);
 
+        List<CategoryApi> categories = products.stream().map(ProductApi::getCategory).distinct().toList();
+
+        catRepo.saveAll(categories);
+
+
+
 //        List<CategoryApi> categorys = new ArrayList<>();
 //        System.out.println("1");
 //        categorys.add((CategoryApi) products.stream().map(ProductApi::getCategory).distinct());

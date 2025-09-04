@@ -42,7 +42,7 @@ public class ProductApi {
 
 
     @Getter
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "Category", referencedColumnName = "type")
     private CategoryApi category;
 
