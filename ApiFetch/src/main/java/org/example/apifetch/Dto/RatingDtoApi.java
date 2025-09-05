@@ -1,7 +1,6 @@
-package org.example.apifetch.model;
+package org.example.apifetch.Dto;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Embeddable
-public class RatingApi {
-    public double rate;
-    public int count;
+public class RatingDtoApi {
+    private Double rate;
+    private int count;
 }
