@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findUserDtoByEmail(String email) {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email).orElse(null);;
         if(user == null) {
             return null;
         }

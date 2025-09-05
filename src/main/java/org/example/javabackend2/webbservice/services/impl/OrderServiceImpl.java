@@ -2,15 +2,18 @@ package org.example.javabackend2.webbservice.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.OrderDto;
-import org.example.javabackend2.webbservice.dtos.UserDto;
+import org.example.javabackend2.webbservice.dtos.ProductDto;
 import org.example.javabackend2.webbservice.mappers.OrderMapper;
 import org.example.javabackend2.webbservice.models.Order;
 import org.example.javabackend2.webbservice.repos.OrderRepository;
-import org.example.javabackend2.webbservice.repos.ProductRepository;
 import org.example.javabackend2.webbservice.services.OrderService;
 import org.example.javabackend2.webbservice.services.ProductService;
 import org.example.javabackend2.webbservice.services.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -24,30 +27,37 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public String createOrder(OrderDto order) {
+    public OrderDto createOrder(OrderDto order) {
         Order newOrder = orderMapper.orderDtoToOrder(order);
 
-        if (newOrder.getUser() == null) {
-            return "User not found";
-        }
+        Order saved = orderRepository.save(newOrder);
 
-        if (newOrder.getProduct() == null) {
-            return "Product not found";
-        }
-
-        orderRepository.save(newOrder);
-        return "Order created";
+        return orderMapper.orderToOrderDto(saved);
     }
 
 
-    //TODO add user to order
     @Override
-    public void createOrderFromProdId(Long id) {
+    public OrderDto createOrderFromProdId(Long id) {
 
-        OrderDto orderDto = new OrderDto();
-        orderDto.setProduct(productService.getProductById(id));
-        orderDto.setUser(userService.findUserDtoByEmail("olafsdottir@4ever.se"));
+        OrderDto result = new OrderDto();
+        result.setProduct(productService.getProductById(id));
+        if (result.getProduct() == null) {
+            return result;
+        }
 
-        createOrder(orderDto);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        result.setUser(userService.findUserDtoByEmail(email));
+        if (result.getUser() == null) {
+            return result;
+        }
+
+        result = createOrder(result);
+
+        return result;
+    }
+
+    public List<OrderDto> getAllOrders() {
+        return orderRepository.findAll().stream().map(orderMapper::orderToOrderDto).toList();
     }
 }

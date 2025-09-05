@@ -1,10 +1,12 @@
 package org.example.javabackend2.webbservice.services;
 
 import org.example.javabackend2.webbservice.dtos.OrderDto;
-import org.example.javabackend2.webbservice.models.Order;
+import org.example.javabackend2.webbservice.dtos.ProductDto;
+
+import java.util.List;
 
 public interface OrderService {
-    String createOrder(OrderDto order);
-
-    void createOrderFromProdId(Long id);
+    OrderDto createOrder(OrderDto order);
+    List<OrderDto> getAllOrders();
+    OrderDto createOrderFromProdId(Long id);
 }
