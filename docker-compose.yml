@@ -1,13 +1,11 @@
 services:
   webshop:
-    image: javabackend2-webshop
     build: .
     ports:
       - "8080:8080"
     #environment:
 
   apifetch:
-    image: javabackend2-apifetch
     build: ./ApiFetch
     ports:
       - "8081:8080"
