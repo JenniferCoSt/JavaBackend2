@@ -14,6 +14,7 @@ import java.util.List;
 @Builder
 
 @Entity
+@Table (name = "Category")
 public class CategoryApi {
     @Id
     @GeneratedValue
