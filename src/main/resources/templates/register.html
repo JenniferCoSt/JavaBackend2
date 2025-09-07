@@ -1,23 +1,47 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Registrera</title>
     <style>
+        form input, form button {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .radio-group {
+            margin-bottom: 10px;
+        }
+
+        .radio-group input[type="radio"] {
+            display: inline;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Registrera</h2>
 
-    <p th:if="${error}" th:text="${error}" style="color: #e74c3c; text-align: center;"></p>
+    <p th:if="${error}" th:text="${error}" style="color: #e74c3c; text-align: left;"></p>
 
     <form th:action="@{/register}" th:object="${user}" method="post">
-        <input type="text" name="name" placeholder="Namn">
-        <input type="text" name="email" placeholder="E-post" required>
-        <input type="password" name="password" placeholder="Lösenord" required>
-        <input type="radio" name="role" value="admin">Admin
-        <input type="radio" name="role" value="user" checked>User
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: #e74c3c;"></div>
+        <input type="text" th:field="*{name}" placeholder="Namn" required>
+
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: #e74c3c;"></div>
+        <input type="text" th:field="*{email}" placeholder="E-post" required>
+
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: #e74c3c;"></div>
+        <input type="password" th:field="*{password}" placeholder="Lösenord" required>
+
+        <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}" style="color: #e74c3c;"></div>
+        <div class="radio-group">
+            <input type="radio" th:field="*{role}" value="admin"/>Admin
+            <input type="radio" th:field="*{role}" value="user" checked>User
+        </div>
+
+
         <button type="submit">Registrera</button>
     </form>
 
