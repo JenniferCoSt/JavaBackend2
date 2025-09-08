@@ -3,7 +3,7 @@ services:
     image: mysql:8.0-bookworm
     container_name: mysql-container
     environment:
-      MYSQL_ROOT_PASSWORD: 8oYnUoR57s
+      MYSQL_ROOT_PASSWORD:
       MYSQL_DATABASE: javabackend2
       MYSQL_USER: guestAdmin
       MYSQL_PASSWORD: SecretPassword
