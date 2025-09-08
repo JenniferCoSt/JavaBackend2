@@ -1,12 +1,36 @@
 services:
+  mysql-db:
+    image: mysql:8.4
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: javabackend2
+      MYSQL_USER: guestAdmin
+      MYSQL_PASSWORD: SecretPassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
   webshop:
     build: .
     ports:
       - "8080:8080"
-    #environment:
-
+    depends_on:
+      - mysql-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/javabackend2
+      SPRING_DATASOURCE_USERNAME: guestAdmin
+      SPRING_DATASOURCE_PASSWORD: SecretPassword
   apifetch:
     build: ./ApiFetch
     ports:
       - "8081:8080"
-    #environment:
+    depends_on:
+      - mysql-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/javabackend2
+      SPRING_DATASOURCE_USERNAME: guestAdmin
+      SPRING_DATASOURCE_PASSWORD: SecretPassword
+volumes:
+  mysql-data:
+    driver: local

@@ -14,7 +14,7 @@ public class ProductApi {
     @Id
     private Long id;
     private String title;
-    @Column (length = 2000)
+    @Column (length = 3000)
     private String description;
     private double price;
 
