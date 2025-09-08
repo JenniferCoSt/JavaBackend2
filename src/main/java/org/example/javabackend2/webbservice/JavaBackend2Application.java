@@ -17,7 +17,7 @@ class JavaBackend2Application {
     public static void main(String[] args) {
         SpringApplication.run(org.example.javabackend2.webbservice.JavaBackend2Application.class, args);
     }
-
+/*
     @Bean
     public CommandLineRunner commandLineRunner(UserRepository userRepository, RoleRepository roleRepository,
                                                ProductRepository productRepository, CategoryRepository categoryRepository,
@@ -116,4 +116,6 @@ class JavaBackend2Application {
 
         };
     }
+
+ */
 }
