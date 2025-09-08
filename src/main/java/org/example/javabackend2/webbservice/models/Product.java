@@ -13,10 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Builder
+@Table (name = "product")
 public class Product {
     @Id
     private Long id;
     private String title;
+    @Column (length = 2000)
     private String description;
     private double price;
     @Embedded

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Embeddable
+@Table (name = "rating")
 public class RatingApi {
     public double rate;
     public int count;
