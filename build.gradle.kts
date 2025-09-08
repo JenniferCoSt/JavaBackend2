@@ -43,6 +43,7 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mysql")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers")
 }
 
 tasks.withType<Test> {
