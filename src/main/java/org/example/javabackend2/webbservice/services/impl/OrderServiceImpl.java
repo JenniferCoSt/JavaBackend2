@@ -57,6 +57,11 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    @Override
+    public void deleteById(long id) {
+        orderRepository.deleteById(id);
+    }
+
     public List<OrderDto> getAllOrders() {
         return orderRepository.findAll().stream().map(orderMapper::orderToOrderDto).toList();
     }

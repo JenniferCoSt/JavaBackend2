@@ -34,7 +34,7 @@
                 <span th:text="${p.rating}"></span>
         </div>
 
-        <a th:href="@{/product/{id}(id=${p.id})}">Buy</a>
+        <a th:href="@{/product/{id}(id=${p.id}, placeorder=true)}">Buy</a>
     </div>
 </div>
 </body>

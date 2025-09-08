@@ -9,4 +9,6 @@ public interface OrderService {
     OrderDto createOrder(OrderDto order);
     List<OrderDto> getAllOrders();
     OrderDto createOrderFromProdId(Long id);
+
+    void deleteById(long id);
 }

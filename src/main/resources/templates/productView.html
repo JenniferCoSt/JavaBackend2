@@ -37,7 +37,8 @@
     <div th:if="${product.rating != null}">
         Rating: <span th:text="${product.rating}"></span>
     </div>
-    <form th:action="@{/orders/confirmed}" method="post">
+
+    <form th:if="${placeorder}" th:action="@{/orders/confirmed}" method="post">
         <input type="hidden" name="id" th:value="${product.id}">
         <button type="submit">Confirm order</button>
     </form>
@@ -47,5 +48,7 @@
 <br>
 
 <a th:href="@{/products}"> <- Back to products</a>
+<br>
+<a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/orders}"> <- Back to orders</a>
 </body>
 </html>
