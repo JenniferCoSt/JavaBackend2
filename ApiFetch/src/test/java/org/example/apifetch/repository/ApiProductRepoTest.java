@@ -3,6 +3,7 @@ package org.example.apifetch.repository;
 import org.example.apifetch.model.CategoryApi;
 import org.example.apifetch.model.ProductApi;
 import org.example.apifetch.model.RatingApi;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,10 +67,11 @@ class ApiProductRepoTest {
         //kan ej spara en produkt utan category
         CategoryApi cat1 = new CategoryApi();
         cat1.setType("electronics");
+        cat1 = categoryRepo.save(cat1);
 
         CategoryApi cat2 = new CategoryApi();
         cat2.setType("jewelery");
-
+        cat2 = categoryRepo.save(cat2);
 
         ProductApi p1 = new ProductApi();
         p1.setId(10001L);
