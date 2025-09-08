@@ -39,7 +39,16 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             return false;
         }
+
         Role role = roleRepository.findByType(userRegisterDto.getRole()).orElse(null);
+        if (role == null) {
+            System.out.println("====== SERVICE ==========");
+            System.out.println(userRegisterDto.getRole().toUpperCase());
+            role = new Role();
+            role.setType(userRegisterDto.getRole().toUpperCase());
+            role = roleRepository.save(role);
+        }
+
         String encodedPassword = passwordEncoder.encode(userRegisterDto.getPassword());
         userRegisterDto.setPassword(encodedPassword);
 
