@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.junit.jupiter.Container;
@@ -18,7 +19,7 @@ import org.testcontainers.containers.MySQLContainer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
-@DataJpaTest
+@SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class RepositoryTest {
 
@@ -32,9 +33,6 @@ class RepositoryTest {
 
     @Autowired
     CategoryRepository categoryRepo;
-
-
-
 
     @Test
     void save_and_load_categories_from_database_repo() {
