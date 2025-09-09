@@ -3,6 +3,7 @@ package org.example.javabackend2.webbservice.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.ProductDto;
 import org.example.javabackend2.webbservice.mappers.ProductMapper;
+import org.example.javabackend2.webbservice.models.Product;
 import org.example.javabackend2.webbservice.repos.ProductRepository;
 import org.example.javabackend2.webbservice.services.ProductService;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto getProductById(long id) {
         return productRepository.findById(id).map(productMapper::productToProductDto).orElse(null);
+    }
+
+    @Override
+    public List<Product> getFeaturedProducts() {
+        return productRepository.findTop8ByOrderByTitleAsc();
     }
 
 }

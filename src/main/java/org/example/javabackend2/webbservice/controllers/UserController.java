@@ -3,7 +3,9 @@ package org.example.javabackend2.webbservice.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.javabackend2.webbservice.dtos.UserRegisterDto;
+import org.example.javabackend2.webbservice.models.Product;
 import org.example.javabackend2.webbservice.models.User;
+import org.example.javabackend2.webbservice.services.ProductService;
 import org.example.javabackend2.webbservice.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final ProductService productService;
 
     @GetMapping("/")
     public String showIndex() {
@@ -29,7 +34,9 @@ public class UserController {
     }
 
     @GetMapping("/home")
-    public String showHomePage() {
+    public String showHomePage(Model model) {
+        List<Product> featuredProducts = productService.getFeaturedProducts();
+        model.addAttribute("featuredProducts", featuredProducts);
         return "home";
     }
 
