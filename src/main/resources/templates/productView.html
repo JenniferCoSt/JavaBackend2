@@ -101,7 +101,7 @@
         <div class="price" th:text="${#numbers.formatDecimal(product.price, 1, 2)}">0.00</div>
         <p th:text="${product.description}"></p>
         <div th:if="${product.rating != null}">
-            Rating: <span th:text="${product.rating}"></span>
+            Rating: <span th:text="${product.rating} + '⭐'"></span>
         </div>
 
         <form th:if="${placeorder}" th:action="@{/orders/confirmed}" method="post">

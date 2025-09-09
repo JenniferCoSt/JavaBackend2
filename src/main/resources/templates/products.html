@@ -132,7 +132,7 @@
             <div class="price" th:text="${#numbers.formatDecimal(p.price, 1, 2)}"></div>
             <p th:text="${p.description}"></p>
             <div th:if="${p.rating != null}">
-                <span th:text="${p.rating}"></span>
+                <span th:text="${p.rating} + '⭐' "></span>
             </div>
 
             <a th:href="@{/product/{id}(id=${p.id}, placeorder=true)}">Buy</a>
