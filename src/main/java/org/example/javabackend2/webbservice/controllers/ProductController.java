@@ -20,12 +20,6 @@ public class ProductController {
     @GetMapping({ "/products"})
     public String listProducts(Model model) {
         List<ProductDto> products = productService.getAllProducts();
-       // for (ProductDto product : products) {
-       //     System.out.println(product.getTitle());
-       // }
-        //if (products.isEmpty()) {
-        //    System.out.println("empty list");
-        //}
         model.addAttribute("products", products);
         return "products";
     }

@@ -20,15 +20,4 @@ public class ProductMapper {
                 .build();
     }
 
-
-    /*
-    private Long id;
-    private String title;
-    private String description;
-    private double price;
-    private String image;
-    private String categoryName;
-    private Double rating;
-    private Integer ratingCount;
-     */
 }

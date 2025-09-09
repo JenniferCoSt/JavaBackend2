@@ -57,8 +57,4 @@ public class OrderMapper {
                 .build();
     }
 
-//    public class OrderDto {
-//        private Long id;
-//        private ProductDto product;
-//        private UserDto user;
 }

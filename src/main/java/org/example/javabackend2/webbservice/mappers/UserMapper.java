@@ -17,19 +17,11 @@ public class UserMapper {
         return UserDetailedDto.builder().id(user.getId()).name(user.getName()).email(user.getEmail()).password(user.getPassword()).role(new RoleDto(user.getRole().getId(), user.getRole().getType())).orders(new ArrayList<>()).build();
     }
 
-    public User userDetailedDtoToUser(UserDetailedDto userDetailedDto) {
-        return null;
-    }
-
     public UserDto userToUserDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .build();
-    }
-
-    public User userDtoToUser(UserDto userDto) {
-        return null;
     }
 
     public User userRegisterDtoToUser(UserRegisterDto dto, Role role) {

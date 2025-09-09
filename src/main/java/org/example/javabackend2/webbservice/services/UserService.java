@@ -11,15 +11,6 @@ public interface UserService {
 
     UserDto findUserDtoByEmail(String mail);
 
-    /*
-    public UserDetailedDto userToUserDetailedDto(User user);
-
-    public User userDetailedDtoToUser(UserDetailedDto userDetailedDto);
-
-    public UserDto userToUserDto(User user);
-
-    public User userDtoToUser(UserDto userDto);
-     */
 
     boolean saveUser(UserRegisterDto userRegisterDto);
 }
