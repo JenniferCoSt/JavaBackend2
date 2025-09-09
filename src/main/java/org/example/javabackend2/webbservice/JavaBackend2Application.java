@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-class JavaBackend2Application {
+public class JavaBackend2Application {
 
     public static void main(String[] args) {
         SpringApplication.run(org.example.javabackend2.webbservice.JavaBackend2Application.class, args);
