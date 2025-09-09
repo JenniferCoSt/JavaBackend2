@@ -44,21 +44,21 @@ class JavaBackend2Application {
                 userRepository.save(new User("Emil", "Lonneberga@4ever.se", passwordEncoder.encode("1234"), role2));
             }
 //
-//            Category cat1 = new Category();
-//            cat1.setType("electronics");
-//            cat1 = categoryRepository.save(cat1);
-//
-//            Category cat2 = new Category();
-//            cat2.setType("jewelery");
-//            cat2 = categoryRepository.save(cat2);
-//
-//            Category cat3 = new Category();
-//            cat3.setType("men's clothing");
-//            cat3 = categoryRepository.save(cat3);
-//
-//            Category cat4 = new Category();
-//            cat4.setType("women's clothing");
-//            cat4 = categoryRepository.save(cat4);
+            Category cat1 = new Category();
+            cat1.setType("electronics");
+            cat1 = categoryRepository.save(cat1);
+
+            Category cat2 = new Category();
+            cat2.setType("jewelery");
+            cat2 = categoryRepository.save(cat2);
+
+            Category cat3 = new Category();
+            cat3.setType("men's clothing");
+            cat3 = categoryRepository.save(cat3);
+
+            Category cat4 = new Category();
+            cat4.setType("women's clothing");
+            cat4 = categoryRepository.save(cat4);
 //
 //
 //            Product p1 = new Product();

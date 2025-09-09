@@ -3,17 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>The Store - Login</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            background-color: #111111;
+        }
+
+        ul li a.active {
+            background-color: #04AA6D;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-<h1>The Store</h1>
-<h2>You're logged in!</h2>
-<a th:href="@{/products}">Products</a>
-<a th:href="@{/orders}">Orders</a>
 
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
+<ul>
+    <li><a href="/home" class="active">Home</a></li>
+    <li><a href="/products">Products</a></li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a href="/orders">Orders</a></li>
+    <li><a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Log out</a></li>
+</ul>
+
+<div class="content">
+    <h1>Welcome to The Store</h1>
+
+
+</div>
+<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
 </form>
-<!---<a th:href="@{/register}">Register</a>-->
 </body>
 </html>
 

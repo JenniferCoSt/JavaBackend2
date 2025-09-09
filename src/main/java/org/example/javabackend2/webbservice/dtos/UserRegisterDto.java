@@ -2,6 +2,7 @@ package org.example.javabackend2.webbservice.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserRegisterDto {
-    @Size(message ="Name must be between 2 and 50 characters", min = 2, max = 50)
+    @Size(message ="Name must be between 2 and 50 letters", min = 2, max = 50)
+    @Pattern(regexp = "^[A-ZÅÄÖa-zåäö]+([ '-][A-ZÅÄÖa-zåäö]+)*$",
+    message = "Name must only contain letters")
     private String name;
     @Email(message = "Invalid email adress")
     private String email;

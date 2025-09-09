@@ -1,26 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head> </head>
+<head>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333333;
+        }
+
+        ul li {
+            float: left;
+        }
+
+        ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+        }
+
+        ul li a:hover {
+            background-color: #111111;
+        }
+
+        ul li a.active {
+            background-color: #04AA6D;
+        }
+
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
 <body>
+<ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/products">Products</a></li>
+    <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a href="/orders">Orders</a></li>
+    <li><a href="#" onclick="document.getElementById('logoutForm').submit(); return false;">Log out</a></li>
+</ul>
 
-<h1 th:switch="${status}">
-    <span th:case="'SUCCESS'">Purchase confirmed!</span>
-    <span th:case="'PRODUCT_NOT_FOUND'">Product not found, contact support for more details</span>
-    <span th:case="'USER_NOT_FOUND'">No user found, sign in required</span>
-    <span th:case="*">Order status</span>
-</h1>
+<div class="content">
+    <h1 th:switch="${status}">
+        <span th:case="'SUCCESS'">Purchase confirmed!</span>
+        <span th:case="'PRODUCT_NOT_FOUND'">Product not found, contact support for more details</span>
+        <span th:case="'USER_NOT_FOUND'">No user found, sign in required</span>
+        <span th:case="*">Order status</span>
+    </h1>
 
 
-<div th:if="${status == 'SUCCESS'}">
-    Order #<span th:text="${order.id}">0</span> created.
+    <div th:if="${status == 'SUCCESS'}">
+        Order #<span th:text="${order.id}">0</span> created.
+    </div>
+
+
+    <div class="card" th:if="${order.product != null}">
+        <h2 th:text="${order.product.title}">Title</h2>
+        <img th:src="${order.product.image}" th:alt="${order.product.title}">
+
+    </div>
+    <a th:href="@{/products}"> <- Back to products</a>
+    <form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">
+    </form>
 </div>
-
-
-<div class="card" th:if="${order.product != null}">
-    <h2 th:text="${order.product.title}">Title</h2>
-    <img th:src="${order.product.image}" th:alt="${order.product.title}">
-
-</div>
-<a th:href="@{/products}"> <- Back to products</a>
 </body>
 </html>

@@ -50,7 +50,7 @@ public class UserController {
         boolean registrationSuccessful = userService.saveUser(userRegisterDto);
         if (!registrationSuccessful) {
             model.addAttribute("user", userRegisterDto);
-            model.addAttribute("error", "Choose a different email");
+            model.addAttribute("error", "Välj en annan e-postadress");
             return "register";
         }
         return "redirect:/login";
