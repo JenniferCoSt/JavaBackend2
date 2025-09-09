@@ -79,7 +79,7 @@
     <h2>Featured products</h2>
     <div class="product-grid" th:if="${featuredProducts != null}">
         <div class="product-card" th:each="p : ${featuredProducts}">
-            <a th:href="@{/product/{id}(id=${p.id})}">
+            <a th:href="@{/product/{id}(id=${p.id}, placeorder=true)}">
                 <img th:src="${p.image}" th:alt="${p.title}">
                 <h3 th:text="${p.title}"></h3>
             </a>
