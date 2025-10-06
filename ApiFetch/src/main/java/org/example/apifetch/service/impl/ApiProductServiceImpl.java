@@ -29,7 +29,7 @@ public class ApiProductServiceImpl implements ApiProductService {
 
     private final ApiCategoryService catServices;
 
-    public ApiProductServiceImpl(ApiCategoryRepo catRepo, ApiProductRepo prodRepo, ApiCategoryService catServices) {
+    public ApiProductServiceImpl(ApiProductRepo prodRepo, ApiCategoryService catServices) {
         this.prodRepo = prodRepo;
         this.catServices = catServices;
     }

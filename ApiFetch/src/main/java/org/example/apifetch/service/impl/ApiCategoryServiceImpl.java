@@ -27,9 +27,9 @@ public class ApiCategoryServiceImpl implements ApiCategoryService {
     @Override
     public void addCategory(CategoryDtoApi category){
 
-        CategoryApi pressentCategory = getCategoryFromTitel(category.getType());
+        CategoryApi presentCategory = catRepo.findByType(category.getType());
 
-        if(pressentCategory == null){
+        if(presentCategory == null){
             CategoryApi newCategory = getCategoryFromDto(category);
 
             catRepo.save(newCategory);
