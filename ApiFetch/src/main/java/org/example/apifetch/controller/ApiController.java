@@ -2,7 +2,7 @@ package org.example.apifetch.controller;
 
 import org.example.apifetch.service.ApiCategoryService;
 import org.example.apifetch.service.ApiProductService;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,9 +16,8 @@ public class ApiController {
         this.apiProductServices = apiProductServices;
     }
 
-    @RequestMapping("loadapi")
+    @PostMapping("/loadapi")
     public void loadApi() {
         apiProductServices.fetchProductsFromApi();
-
     }
 }
