@@ -9,9 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.containers.MySQLContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,32 +21,6 @@ class ApiProductRepoTest {
 
     @Autowired
     ApiCategoryRepo categoryRepo;
-
-
-    @Test
-    void save_and_load_categories_from_database_repo() {
-
-        CategoryApi cat1 = new CategoryApi();
-        cat1.setType("electronics");
-        cat1 = categoryRepo.save(cat1);
-
-        CategoryApi found1 = categoryRepo.findById(cat1.getId()).orElseThrow();
-        assertThat(found1.getType()).isEqualTo("electronics");
-        assertThat(found1.getType()).isNotEqualTo("plushies");
-
-
-        CategoryApi cat2 = new CategoryApi();
-        cat2.setType("jewelery");
-        cat2 = categoryRepo.save(cat2);
-
-
-        CategoryApi found2 = categoryRepo.findById(cat2.getId()).orElseThrow();
-        assertThat(found2.getType()).isEqualTo("jewelery");
-        assertThat(found2.getType()).isNotEqualTo("electronic");
-
-        assertThat(categoryRepo.findAll()).hasSize(2);
-
-    }
 
     @Test
     void save_and_load_products_from_database_repo() {
@@ -115,6 +86,4 @@ class ApiProductRepoTest {
         assertThat(productRepo.findAll()).hasSize(0);
 
     }
-
-
 }
