@@ -30,12 +30,9 @@ public class ApiCategoryServiceImpl implements ApiCategoryService {
         CategoryApi pressentCategory = getCategoryFromTitel(category.getType());
 
         if(pressentCategory == null){
-
-            //här borde vi köra dtoToEntety
             CategoryApi newCategory = getCategoryFromDto(category);
 
             catRepo.save(newCategory);
-            System.out.println("new category "+ category.getType() +" added");
         }
     }
 
@@ -43,5 +40,4 @@ public class ApiCategoryServiceImpl implements ApiCategoryService {
     public CategoryApi getCategoryFromDto(CategoryDtoApi category) {
         return CategoryApi.builder().type(category.getType()).build();
     }
-
 }
