@@ -1,7 +1,6 @@
-package org.example.apifetch.ApiServices.impl;
+package org.example.apifetch.service.impl;
 
-import lombok.RequiredArgsConstructor;
-import org.example.apifetch.ApiServices.ApiCategoryServices;
+import org.example.apifetch.service.ApiCategoryService;
 import org.example.apifetch.Dto.CategoryDtoApi;
 import org.example.apifetch.model.CategoryApi;
 import org.example.apifetch.repository.ApiCategoryRepo;
@@ -9,12 +8,12 @@ import org.example.apifetch.repository.ApiProductRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ApiCategoryServicesImpl implements ApiCategoryServices {
+public class ApiCategoryServiceImpl implements ApiCategoryService {
 
     private final ApiCategoryRepo catRepo;
     private final ApiProductRepo prodRepo;
 
-    public ApiCategoryServicesImpl(ApiCategoryRepo catRepo, ApiProductRepo prodRepo) {
+    public ApiCategoryServiceImpl(ApiCategoryRepo catRepo, ApiProductRepo prodRepo) {
         this.catRepo = catRepo;
         this.prodRepo = prodRepo;
     }
@@ -44,24 +43,5 @@ public class ApiCategoryServicesImpl implements ApiCategoryServices {
     public CategoryApi getCategoryFromDto(CategoryDtoApi category) {
         return CategoryApi.builder().type(category.getType()).build();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

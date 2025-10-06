@@ -1,40 +1,29 @@
 package org.example.apifetch.repository;
 
-import org.example.apifetch.ApiServices.ApiProductServices;
-import org.example.apifetch.ApiServices.impl.ApiProductServicesImpl;
 import org.example.apifetch.model.CategoryApi;
 import org.example.apifetch.model.ProductApi;
 import org.example.apifetch.model.RatingApi;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.containers.MySQLContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Testcontainers
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class ApiProductRepoTest {
-
-
-    @Container
-    @ServiceConnection
-    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0-bookworm");
 
     @Autowired
     ApiProductRepo productRepo;
 
     @Autowired
     ApiCategoryRepo categoryRepo;
-
-
 
 
     @Test
