@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY gradlew .
 COPY gradle gradle
-COPY build.gradle settings.gradle ./
+COPY *.gradle* ./
 
 RUN ./gradlew dependencies || true
 
