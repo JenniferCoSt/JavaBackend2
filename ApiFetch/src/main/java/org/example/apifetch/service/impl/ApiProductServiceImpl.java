@@ -25,13 +25,11 @@ import java.util.List;
 @Service
 public class ApiProductServiceImpl implements ApiProductService {
 
-    private final ApiCategoryRepo catRepo;
     private final ApiProductRepo prodRepo;
 
     private final ApiCategoryService catServices;
 
     public ApiProductServiceImpl(ApiCategoryRepo catRepo, ApiProductRepo prodRepo, ApiCategoryService catServices) {
-        this.catRepo = catRepo;
         this.prodRepo = prodRepo;
         this.catServices = catServices;
     }
@@ -51,10 +49,15 @@ public class ApiProductServiceImpl implements ApiProductService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             ObjectMapper mapper = new ObjectMapper();
-            List<ProductDtoApi> productsDtos = Arrays.asList(mapper.readValue(response.body(), ProductDtoApi[].class));
+            List<ProductDtoApi> productDtos = Arrays.asList(mapper.readValue(response.body(), ProductDtoApi[].class));
 
-            createCategorys(productsDtos);
-            saveProducts(productsDtos);
+            productDtos.stream()
+                    .map(ProductDtoApi::getCategory)
+                    .distinct()
+                    .forEach(c -> catServices.
+                            addCategory(CategoryDtoApi.builder().type(c).build()));
+
+            saveProducts(productDtos);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -76,15 +79,10 @@ public class ApiProductServiceImpl implements ApiProductService {
                 .build();
     }
 
-    public void createCategorys(List<ProductDtoApi> productDtos) {
-        List<String> newCategorys = productDtos.stream().map(ProductDtoApi::getCategory).distinct().toList();
-        newCategorys.forEach(c -> catServices.addCategory(CategoryDtoApi.builder().type(c).build()));
-    }
-
 
     public void saveProducts(List<ProductDtoApi> productDtos) {
-        List<ProductApi> productEntitys = productDtos.stream().map(this::productDtoToProduct).toList();
-        prodRepo.saveAll(productEntitys);
+        List<ProductApi> productEntities = productDtos.stream().map(this::productDtoToProduct).toList();
+        prodRepo.saveAll(productEntities);
     }
 
     public RatingApi ratingDtoToRating(RatingDtoApi ratingDto) {

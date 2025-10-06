@@ -17,6 +17,4 @@ public interface ApiProductService {
 
     public RatingApi ratingDtoToRating(RatingDtoApi ratingDto);
 
-    public void createCategorys(List<ProductDtoApi> productDtos);
-
 }
