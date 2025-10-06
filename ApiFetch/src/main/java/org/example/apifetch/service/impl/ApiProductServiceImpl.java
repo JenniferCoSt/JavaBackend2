@@ -53,20 +53,13 @@ public class ApiProductServiceImpl implements ApiProductService {
             ObjectMapper mapper = new ObjectMapper();
             List<ProductDtoApi> productsDtos = Arrays.asList(mapper.readValue(response.body(), ProductDtoApi[].class));
 
-
-            List<String> newCategorys = productsDtos.stream().map(ProductDtoApi::getCategory).distinct().toList();
-
-            newCategorys.forEach(c -> catServices.addCategory(CategoryDtoApi.builder().type(c).build()));
-
-            List<ProductApi> productEntitys = productsDtos.stream().map(this::productDtoToProduct).toList();
-
-            prodRepo.saveAll(productEntitys);
+            createCategorys(productsDtos);
+            saveProducts(productsDtos);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
-
 
     public ProductApi productDtoToProduct(ProductDtoApi productDto) {
 
@@ -83,8 +76,15 @@ public class ApiProductServiceImpl implements ApiProductService {
                 .build();
     }
 
-    public void saveProducts(ProductApi product) {
-        prodRepo.save(product);
+    public void createCategorys(List<ProductDtoApi> productDtos) {
+        List<String> newCategorys = productDtos.stream().map(ProductDtoApi::getCategory).distinct().toList();
+        newCategorys.forEach(c -> catServices.addCategory(CategoryDtoApi.builder().type(c).build()));
+    }
+
+
+    public void saveProducts(List<ProductDtoApi> productDtos) {
+        List<ProductApi> productEntitys = productDtos.stream().map(this::productDtoToProduct).toList();
+        prodRepo.saveAll(productEntitys);
     }
 
     public RatingApi ratingDtoToRating(RatingDtoApi ratingDto) {
