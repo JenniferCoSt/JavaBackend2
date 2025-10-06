@@ -1,6 +1,5 @@
 package org.example.apifetch.service;
 
-import org.example.apifetch.Dto.CategoryDtoApi;
 import org.example.apifetch.Dto.ProductDtoApi;
 import org.example.apifetch.Dto.RatingDtoApi;
 import org.example.apifetch.model.CategoryApi;
@@ -15,15 +14,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.assertj.core.api.Assertions;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension .class)
-class ApiServiceTest {
+class ApiProductServiceTest {
 
     @InjectMocks
     ApiProductServiceImpl productService;
@@ -46,8 +45,7 @@ class ApiServiceTest {
 
     private ProductDtoApi productDtoApi1;
     private ProductDtoApi productDtoApi2;
-    private CategoryDtoApi categoryDtoApi1;
-    private CategoryDtoApi categoryDtoApi2;
+
     private RatingDtoApi ratingDtoApi1;
     private RatingDtoApi ratingDtoApi2;
 
@@ -56,15 +54,6 @@ class ApiServiceTest {
 
     @BeforeEach
     void setUp() {
-        categoryDtoApi1 = CategoryDtoApi.builder()
-                .id(1L)
-                .type("food")
-                .build();
-
-        categoryDtoApi2 = CategoryDtoApi.builder()
-                .id(2L)
-                .type("animal")
-                .build();
 
         ratingDtoApi1 = RatingDtoApi.builder()
                 .rate(3.5)
@@ -143,8 +132,15 @@ class ApiServiceTest {
     }
 
     @Test
-    void ApiService_convertFromDto_returnProductApi(){
+    void ApiService_convertFromDto_returnEntity(){
+        when(categoryService.getCategoryFromTitel("food")).thenReturn(categoryApi1);
+        when(categoryService.getCategoryFromTitel("animal")).thenReturn(categoryApi2);
 
+        ProductApi result1 = productService.productDtoToProduct(productDtoApi1);
+        ProductApi result2 = productService.productDtoToProduct(productDtoApi2);
+
+        Assertions.assertThat(result1).isEqualTo(productApi1);
+        Assertions.assertThat(result2).isEqualTo(productApi2);
     }
 
     @Test
@@ -155,6 +151,17 @@ class ApiServiceTest {
         productService.saveProducts(productDtos);
 
         verify(productRepo).saveAll(productApiList);
+
+    }
+
+    @Test
+    void ApiService_convertRatingDto_toRatingEntity() {
+        RatingApi result1 = productService.ratingDtoToRating(ratingDtoApi1);
+        RatingApi result2 = productService.ratingDtoToRating(ratingDtoApi2);
+
+        Assertions.assertThat(result1).isEqualTo(ratingApi1);
+        Assertions.assertThat(result2).isEqualTo(ratingApi2);
+
 
     }
 
