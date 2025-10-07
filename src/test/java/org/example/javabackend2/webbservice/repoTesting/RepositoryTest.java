@@ -7,15 +7,18 @@ import org.example.javabackend2.webbservice.repos.CategoryRepository;
 import org.example.javabackend2.webbservice.repos.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@SpringBootTest
+@AutoConfigureTestDatabase(
+        replace = AutoConfigureTestDatabase.Replace.ANY,
+        connection = EmbeddedDatabaseConnection.H2
+)
 @org.springframework.boot.autoconfigure.domain.EntityScan("org.example.javabackend2.webbservice.models")
 @org.springframework.data.jpa.repository.config.EnableJpaRepositories("org.example.javabackend2.webbservice.repos")
 public class RepositoryTest {
@@ -63,7 +66,7 @@ public class RepositoryTest {
 
 
         Product p1 = new Product();
-        //p1.setId(10001L);
+        p1.setId(10001L);
         p1.setTitle("Wireless Headphones");
         p1.setDescription("Over-ear Bluetooth headphones with 30h battery.");
         p1.setPrice(79.99);
@@ -90,7 +93,7 @@ public class RepositoryTest {
         cat1 = categoryRepo.save(cat1);
 
         Product p1 = new Product();
-        //p1.setId(10001L);
+        p1.setId(10001L);
         p1.setTitle("Wireless Headphones");
         p1.setDescription("Over-ear Bluetooth headphones with 30h battery.");
         p1.setPrice(79.99);
@@ -100,7 +103,7 @@ public class RepositoryTest {
         productRepo.save(p1);
 
         Product p2 = new Product();
-        //p2.setId(10002L);
+        p2.setId(10002L);
         p2.setTitle("27\" 4K Monitor");
         p2.setDescription("27-inch 4K IPS, HDR10, 60Hz.");
         p2.setPrice(269.00);
