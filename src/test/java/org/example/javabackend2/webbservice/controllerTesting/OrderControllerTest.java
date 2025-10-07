@@ -60,4 +60,12 @@ class OrderControllerTest {
         assertThat(model.getAttribute("orders")).isEqualTo(List.of(o1, o2));
         verify(orderService).getAllOrders();
     }
+
+    @Test
+    void deleteOrder_callsService_and_redirects() {
+        String view = controller.deleteOrder(5L);
+
+        assertThat(view).isEqualTo("redirect:/orders");
+        verify(orderService).deleteById(5L);
+    }
 }
