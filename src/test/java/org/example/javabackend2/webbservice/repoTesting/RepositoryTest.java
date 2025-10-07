@@ -63,7 +63,7 @@ public class RepositoryTest {
 
 
         Product p1 = new Product();
-        p1.setId(10001L);
+        //p1.setId(10001L);
         p1.setTitle("Wireless Headphones");
         p1.setDescription("Over-ear Bluetooth headphones with 30h battery.");
         p1.setPrice(79.99);
@@ -90,7 +90,7 @@ public class RepositoryTest {
         cat1 = categoryRepo.save(cat1);
 
         Product p1 = new Product();
-        p1.setId(10001L);
+        //p1.setId(10001L);
         p1.setTitle("Wireless Headphones");
         p1.setDescription("Over-ear Bluetooth headphones with 30h battery.");
         p1.setPrice(79.99);
@@ -100,7 +100,7 @@ public class RepositoryTest {
         productRepo.save(p1);
 
         Product p2 = new Product();
-        p2.setId(10002L);
+        //p2.setId(10002L);
         p2.setTitle("27\" 4K Monitor");
         p2.setDescription("27-inch 4K IPS, HDR10, 60Hz.");
         p2.setPrice(269.00);
