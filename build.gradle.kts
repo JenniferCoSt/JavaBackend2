@@ -40,10 +40,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.testcontainers:testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mysql")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
+    testImplementation("com.h2database:h2")
 }
 
 tasks.withType<Test> {

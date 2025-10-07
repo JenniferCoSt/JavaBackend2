@@ -6,27 +6,20 @@ import org.example.javabackend2.webbservice.models.Rating;
 import org.example.javabackend2.webbservice.repos.CategoryRepository;
 import org.example.javabackend2.webbservice.repos.ProductRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.containers.MySQLContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Testcontainers
-@SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class RepositoryTest {
+@DataJpaTest
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@org.springframework.boot.autoconfigure.domain.EntityScan("org.example.javabackend2.webbservice.models")
+@org.springframework.data.jpa.repository.config.EnableJpaRepositories("org.example.javabackend2.webbservice.repos")
+public class RepositoryTest {
 
-
-    @Container
-    @ServiceConnection
-    static MySQLContainer<?> mysql = new MySQLContainer<>("mysql:8.0-bookworm");
 
     @Autowired
     ProductRepository productRepo;
