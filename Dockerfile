@@ -1,12 +1,21 @@
 # 🐳 Dockerfile
 
-# Basimage: en liten och snabb OpenJDK 17 med Alpine Linux.
+FROM eclipse-temurin:17-jdk-alpine AS build
+WORKDIR /app
+
+COPY gradlew .
+COPY gradle gradle
+COPY *.gradle* ./
+
+RUN ./gradlew dependencies || true
+
+COPY . .
+
+RUN chmod +x gradlew
+RUN ./gradlew bootJar
+
 FROM eclipse-temurin:17-jdk-alpine
-# För att stödja Spring Boot’s temporära filer.
-VOLUME /tmp
-# Tillåter att du bygger mot vilken .jar som ligger där (från ditt gradle/maven build).
-ARG JAR_FILE=build/libs/*.jar
-# Kopierar jar-filen från build-mappen i ditt projekt in till imagen som /app.jar.
-COPY ${JAR_FILE} app.jar
-# ENTRYPOINT ["java", "-jar", "/app.jar"]
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+WORKDIR /app
+COPY --from=build /app/build/libs/JavaBackend2-0.0.1-SNAPSHOT.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
