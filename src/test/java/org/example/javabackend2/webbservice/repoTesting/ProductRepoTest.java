@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 @org.springframework.boot.autoconfigure.domain.EntityScan("org.example.javabackend2.webbservice.models")
 @org.springframework.data.jpa.repository.config.EnableJpaRepositories("org.example.javabackend2.webbservice.repos")
-public class RepositoryTest {
+public class ProductRepoTest {
 
 
     @Autowired
