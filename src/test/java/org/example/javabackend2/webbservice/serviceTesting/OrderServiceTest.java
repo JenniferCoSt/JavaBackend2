@@ -16,10 +16,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.same;
 
 import java.util.List;
 
@@ -59,16 +63,16 @@ class OrderServiceTest {
                 .id(10L).title("T").description("D").price(99.0)
                 .image("img").categoryName("cat").rating(4.5)
                 .build();
-        UserDto user = UserDto.builder().id(5L).name("Alice").build();
+        UserDto user = UserDto.builder().id(5L).name("Pippi").build();
         OrderDto input = OrderDto.builder().id(null).product(prod).user(user).build();
 
         Order mappedEntity = new Order();
         Order savedEntity = new Order();
         OrderDto mappedBack = OrderDto.builder().id(123L).product(prod).user(user).build();
 
-        when(orderMapper.orderDtoToOrder(input)).thenReturn(mappedEntity);
-        when(orderRepository.save(mappedEntity)).thenReturn(savedEntity);
-        when(orderMapper.orderToOrderDto(savedEntity)).thenReturn(mappedBack);
+        when(orderMapper.orderDtoToOrder(any(OrderDto.class))).thenReturn(mappedEntity);
+        when(orderRepository.save(any(Order.class))).thenReturn(savedEntity);
+        when(orderMapper.orderToOrderDto(any(Order.class))).thenReturn(mappedBack);
 
         // when
         OrderDto result = orderService.createOrder(input);
