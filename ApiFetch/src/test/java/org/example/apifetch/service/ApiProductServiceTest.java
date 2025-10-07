@@ -161,8 +161,5 @@ class ApiProductServiceTest {
 
         Assertions.assertThat(result1).isEqualTo(ratingApi1);
         Assertions.assertThat(result2).isEqualTo(ratingApi2);
-
-
     }
-
 }
