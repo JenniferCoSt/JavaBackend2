@@ -1,10 +1,6 @@
 package org.example.javabackend2.webbservice.controllerTesting;
-import org.example.javabackend2.webbservice.controllers.OrderController;
 import org.example.javabackend2.webbservice.controllers.ProductController;
-import org.example.javabackend2.webbservice.dtos.OrderDto;
 import org.example.javabackend2.webbservice.dtos.ProductDto;
-import org.example.javabackend2.webbservice.dtos.UserDto;
-import org.example.javabackend2.webbservice.services.OrderService;
 import org.example.javabackend2.webbservice.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,9 +28,9 @@ public class ProductControllerTest {
         Model model = new ExtendedModelMap();
 
         // given
-        var p1 = ProductDto.builder().id(1L).title("Apple").build();
-        var p2 = ProductDto.builder().id(2L).title("Banana").build();
-        var products = List.of(p1, p2);
+        ProductDto p1 = ProductDto.builder().id(1L).title("Jacket").build();
+        ProductDto p2 = ProductDto.builder().id(2L).title("Jillet").build();
+        List<ProductDto> products = List.of(p1, p2);
         when(productService.getAllProducts()).thenReturn(products);
 
         // when
@@ -47,18 +43,23 @@ public class ProductControllerTest {
         verifyNoMoreInteractions(productService);
     }
 
+    @Test
+    void listOneProduct_and_returns_productView() {
+        Model model = new ExtendedModelMap();
 
-    /*
+        //given
+        ProductDto p1 = ProductDto.builder().id(1L).title("Jacket").build();
+        when(productService.getProductById(1L)).thenReturn(p1);
 
+        //when
+        String view = controller.listOneProduct(model, 1L, false);
 
-    @GetMapping("/product/{id}")
-    public String listOneProduct(Model model, @PathVariable long id
-    , @RequestParam(defaultValue = "false") boolean placeorder) {
-        ProductDto product = productService.getProductById(id);
-
-        model.addAttribute("product", product);
-        model.addAttribute("placeorder", placeorder);
-        return "productView";
+        //then
+        assertThat(view).isEqualTo("productView");
+        assertThat(model.getAttribute("product")).isEqualTo(p1);
+        assertThat(model.getAttribute("placeorder")).isEqualTo(false);
+        verify(productService).getProductById(1L);
+        verifyNoMoreInteractions(productService);
     }
-     */
+
 }
