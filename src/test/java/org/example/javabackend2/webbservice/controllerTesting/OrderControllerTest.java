@@ -45,4 +45,19 @@ class OrderControllerTest {
         assertThat(model.getAttribute("order")).isEqualTo(order);
         verify(orderService).createOrderFromProdId(productId);
     }
+
+
+    @Test
+    void listOrders_addsOrdersToModel_and_returns_ordersView() {
+        Model model = new ExtendedModelMap();
+        OrderDto o1 = OrderDto.builder().id(1L).build();
+        OrderDto o2 = OrderDto.builder().id(2L).build();
+        when(orderService.getAllOrders()).thenReturn(List.of(o1, o2));
+
+        String view = controller.listProducts(model);
+
+        assertThat(view).isEqualTo("orders");
+        assertThat(model.getAttribute("orders")).isEqualTo(List.of(o1, o2));
+        verify(orderService).getAllOrders();
+    }
 }
