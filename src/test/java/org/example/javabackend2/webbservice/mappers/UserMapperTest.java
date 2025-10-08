@@ -26,8 +26,9 @@ public class UserMapperTest {
     @InjectMocks
 //    @Mock
     private UserMapper userMapper;
-    Role user = new Role("user");                       //inicera i before  each
-    RoleDto userDto = new RoleDto(null,"user");
+
+    Role user;
+    RoleDto userDto;
 
     User user1;
     User user2;
@@ -40,6 +41,9 @@ public class UserMapperTest {
 
     @BeforeEach
     void setUp() {
+
+        user = new Role("user");
+        userDto = new RoleDto(null,"user");
 
         user1 = User.builder()
                 .name("Anders")
