@@ -84,17 +84,4 @@ public class UserServiceTest {
         Assertions.assertNull(result3);
 
     }
-
-    @Test
-    void userService_saveUser_ReturnsBoolean(){
-
-
-
-    }
-
-    @Test
-    void userService_findUserDtoByEmail_ReturnsUserDto(){
-
-
-    }
 }
