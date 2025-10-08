@@ -14,7 +14,14 @@ import java.util.ArrayList;
 public class UserMapper {
 
     public UserDetailedDto userToUserDetailedDto(User user) {
-        return UserDetailedDto.builder().id(user.getId()).name(user.getName()).email(user.getEmail()).password(user.getPassword()).role(new RoleDto(user.getRole().getId(), user.getRole().getType())).orders(new ArrayList<>()).build();
+        return UserDetailedDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .role(new RoleDto(user.getRole().getId(), user.getRole().getType()))
+                .orders(new ArrayList<>())
+                .build();
     }
 
     public UserDto userToUserDto(User user) {
