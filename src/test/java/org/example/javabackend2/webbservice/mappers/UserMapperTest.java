@@ -24,7 +24,6 @@ public class UserMapperTest {
 
 
     @InjectMocks
-//    @Mock
     private UserMapper userMapper;
 
     Role user;
