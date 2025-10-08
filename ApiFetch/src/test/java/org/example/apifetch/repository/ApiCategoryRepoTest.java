@@ -46,12 +46,12 @@ public class ApiCategoryRepoTest {
         categoryRepo.save(cat1);
         categoryRepo.save(cat2);
 
-        CategoryApi result1 = categoryRepo.findByType(cat1.getType());
+        CategoryApi result1 = categoryRepo.findByType("electronics");
         assertThat(result1.getType()).isEqualTo("electronics");
         assertThat(result1.getType()).isNotEqualTo("plushies");
         assertThat(result1).isNotNull();
 
-        CategoryApi result2 = categoryRepo.findByType(cat2.getType());
+        CategoryApi result2 = categoryRepo.findByType("jewelery");
         assertThat(result2.getType()).isEqualTo("jewelery");
         assertThat(result2.getType()).isNotEqualTo("electronic");
         assertThat(result2).isNotNull();
