@@ -9,17 +9,24 @@ import org.example.javabackend2.webbservice.models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserMapperTest {
 
-//    @InjectMocks
+@ExtendWith(MockitoExtension.class)
+public class UserMapperTest {
+
+
+    @InjectMocks
 //    @Mock
     private UserMapper userMapper;
-    Role user = new Role("user");
+    Role user = new Role("user");                       //inicera i before  each
     RoleDto userDto = new RoleDto(null,"user");
 
     User user1;
@@ -36,7 +43,7 @@ class UserMapperTest {
 
         user1 = User.builder()
                 .name("Anders")
-                .email("andreas_andersson@gmail.com")
+                .email("anders_andersson@gmail.com")
                 .password("12345A")
                 .role(user)
                 .build();
@@ -49,7 +56,7 @@ class UserMapperTest {
                 .build();
 
         userDto1 = UserDto.builder()
-                .name("Andreas")
+                .name("Anders")
                 .build();
 
         userDto2 = UserDto.builder()
@@ -58,9 +65,10 @@ class UserMapperTest {
 
         userDetailedDto1 = UserDetailedDto.builder()
                 .name("Anders")
-                .email("andreas_andersson@gmail.com")
+                .email("anders_andersson@gmail.com")
                 .password("12345A")
                 .role(userDto)
+                .orders(Collections.emptyList())
                 .build();
 
         userDetailedDto2 = UserDetailedDto.builder()
@@ -68,11 +76,12 @@ class UserMapperTest {
                 .email("bertil_bertilsson@gmail.com")
                 .password("12345B")
                 .role(userDto)
+                .orders(Collections.emptyList())
                 .build();
 
         userRegisterDto1 = UserRegisterDto.builder()
                 .name("Anders")
-                .email("andreas_andersson@gmail.com")
+                .email("anders_andersson@gmail.com")
                 .password("12345A")
                 .role("user")
                 .build();
