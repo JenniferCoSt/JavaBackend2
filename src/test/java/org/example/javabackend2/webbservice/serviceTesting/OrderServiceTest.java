@@ -33,10 +33,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
 
-    @Mock private OrderMapper orderMapper;
-    @Mock private OrderRepository orderRepository;
-    @Mock private ProductService productService;
-    @Mock private UserService userService;
+    @Mock
+    private OrderMapper orderMapper;
+    @Mock
+    private OrderRepository orderRepository;
+    @Mock
+    private ProductService productService;
+    @Mock
+    private UserService userService;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -100,8 +104,6 @@ class OrderServiceTest {
         UserDto user = UserDto.builder().id(7L).name("Greta").build();
         when(userService.findUserDtoByEmail("user@example.com")).thenReturn(user);
 
-        //OrderDto preSave = OrderDto.builder().product(prod).user(user).build();
-
         Order mappedEntity = new Order();
         Order savedEntity = new Order();
         OrderDto savedDto = OrderDto.builder().id(999L).product(prod).user(user).build();
@@ -132,6 +134,7 @@ class OrderServiceTest {
     void createOrderFromProdId_returnsDtoWithOnlyNulls_whenProductNotFound() {
         // given
         long prodId = 100L;
+
         when(productService.getProductById(prodId)).thenReturn(null);
 
         // when
@@ -151,6 +154,7 @@ class OrderServiceTest {
         // given
         long prodId = 200L;
         ProductDto prod = ProductDto.builder().id(prodId).title("Y").build();
+
         when(productService.getProductById(prodId)).thenReturn(prod);
 
         when(securityContext.getAuthentication()).thenReturn(authentication);
@@ -186,6 +190,7 @@ class OrderServiceTest {
         // given
         Order e1 = new Order();
         Order e2 = new Order();
+
         when(orderRepository.findAll()).thenReturn(List.of(e1, e2));
 
         OrderDto d1 = OrderDto.builder().id(1L).build();

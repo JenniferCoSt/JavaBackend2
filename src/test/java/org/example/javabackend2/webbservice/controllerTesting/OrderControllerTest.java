@@ -32,14 +32,17 @@ class OrderControllerTest {
         Model model = new ExtendedModelMap();
         long productId = 42L;
 
+        //given
         ProductDto product = ProductDto.builder().id(productId).title("sportswear").build();
         UserDto user    = UserDto.builder().id(7L).name("Greta").build();
         OrderDto order   = OrderDto.builder().id(999L).product(product).user(user).build();
 
         when(orderService.createOrderFromProdId(productId)).thenReturn(order);
 
+        //when
         String view = controller.addOrder(model, productId);
 
+        //then
         assertThat(view).isEqualTo("purchaseConfirmation");
         assertThat(model.getAttribute("status")).isEqualTo("SUCCESS");
         assertThat(model.getAttribute("order")).isEqualTo(order);
@@ -50,12 +53,17 @@ class OrderControllerTest {
     @Test
     void listOrders_addsOrdersToModel_and_returns_ordersView() {
         Model model = new ExtendedModelMap();
+        //given
         OrderDto o1 = OrderDto.builder().id(1L).build();
         OrderDto o2 = OrderDto.builder().id(2L).build();
+
         when(orderService.getAllOrders()).thenReturn(List.of(o1, o2));
 
+
+        //when
         String view = controller.listProducts(model);
 
+        //then
         assertThat(view).isEqualTo("orders");
         assertThat(model.getAttribute("orders")).isEqualTo(List.of(o1, o2));
         verify(orderService).getAllOrders();
@@ -63,8 +71,11 @@ class OrderControllerTest {
 
     @Test
     void deleteOrder_callsService_and_redirects() {
+
+        //when
         String view = controller.deleteOrder(5L);
 
+        //then
         assertThat(view).isEqualTo("redirect:/orders");
         verify(orderService).deleteById(5L);
     }
